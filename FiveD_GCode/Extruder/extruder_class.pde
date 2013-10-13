@@ -1,4 +1,3 @@
-
 #include "configuration.h"
 #include "extruder.h"
 #include "temperature.h"
@@ -552,10 +551,10 @@ void extruder::valveTurn(bool close)
   {
   case VALVE_STARTING: 
           if(close)
-             digitalWrite(H1D, 1);
+             digitalWrite(H2D, 1);
           else
-             digitalWrite(H1D, 0);
-          digitalWrite(H1E, HIGH);
+             digitalWrite(H2D, 0);
+          digitalWrite(H2E, HIGH);
           break;
           
   case VALVE_RUNNING:
@@ -563,14 +562,14 @@ void extruder::valveTurn(bool close)
   
   case VALVE_STOPPING:
           if(close)
-            digitalWrite(H1D, 0);
+            digitalWrite(H2D, 0);
           else
-            digitalWrite(H1D, 1);
+            digitalWrite(H2D, 1);
             
           if(!valveTimeCheck(10))
             return;
             
-          digitalWrite(H1E, LOW);
+          digitalWrite(H2E, LOW);
           valveState = close;
           valveAtEnd = true;
           seenHighLow = false;
@@ -594,10 +593,10 @@ void extruder::kickStartValve()
   if(digitalRead(OPTO_PIN))
   {
      if(requiredValveState)
-       digitalWrite(H1D, 1);
+       digitalWrite(H2D, 1);
      else
-       digitalWrite(H1D, 0);
-     digitalWrite(H1E, HIGH);    
+       digitalWrite(H2D, 0);
+     digitalWrite(H2E, HIGH);    
   }
 } 
 #endif
